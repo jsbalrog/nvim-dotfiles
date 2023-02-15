@@ -30,8 +30,6 @@ return require('packer').startup(function(use)
 
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
 
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   use 'norcalli/nvim-colorizer.lua' -- colorize css
@@ -79,4 +77,12 @@ return require('packer').startup(function(use)
   use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
 
   use 'windwp/nvim-autopairs'
+
+  -- Comment-related plugins
+  use 'numToStr/Comment.nvim'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+  -- Prettier-related plugins (along with nvim-lspconfig, already required above)
+  use 'MunifTanjim/prettier.nvim'
+  use 'jose-elias-alvarez/null-ls.nvim'
 end)
