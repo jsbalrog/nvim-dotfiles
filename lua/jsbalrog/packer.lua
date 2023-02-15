@@ -61,4 +61,20 @@ return require('packer').startup(function(use)
 
   -- See your buffers as tabs
   use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+
+  use { "echasnovski/mini.nvim", branch = "stable" } -- So I can use mini.cursorword
+
+  use 'j-hui/fidget.nvim' -- useful status updates for LSP
+
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    }
+  }
+
+  use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
 end)
