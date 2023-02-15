@@ -77,4 +77,6 @@ return require('packer').startup(function(use)
   }
 
   use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
+
+  use 'windwp/nvim-autopairs'
 end)
