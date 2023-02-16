@@ -259,6 +259,11 @@ _G.packer_plugins = {
     path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/vim-sleuth",
     url = "https://github.com/tpope/vim-sleuth"
   },
+  ["vim-surround"] = {
+    loaded = true,
+    path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
+  },
   ["vim-unimpaired"] = {
     loaded = true,
     path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/vim-unimpaired",

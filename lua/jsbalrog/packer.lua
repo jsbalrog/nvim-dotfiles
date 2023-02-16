@@ -76,6 +76,8 @@ return require('packer').startup(function(use)
 
   use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
 
+  use 'tpope/vim-surround' -- surround things with things
+
   use 'windwp/nvim-autopairs'
 
   -- Comment-related plugins

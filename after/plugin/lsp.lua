@@ -29,10 +29,10 @@ lsp.set_preferences({
 
 lsp.setup_nvim_cmp({
 	mapping = cmp_mappings,
-	-- preselect = 'none',
+	preselect = 'none',
 	completion = {
-	  -- completeopt = 'menu,menuone,noinsert,noselect',
-	  autocomplete = false
+	  completeopt = 'menu,menuone,noinsert,noselect',
+	  -- autocomplete = false
 	},
 })
 

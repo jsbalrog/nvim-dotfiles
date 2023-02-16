@@ -1,27 +1,38 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
-vim.keymap.set({'', 'i', 'n', 'v'}, '<Leader>d', '<Esc>') -- Comma + d is escape
-
 vim.keymap.set('n', '<leader>pv', vim.cmd.Ex) -- Netrw directory tree open
 
+vim.keymap.set({ '', 'i', 'n', 'v' }, '<Leader>d', '<Esc>') -- Comma + d is escape
+
+-- [[ Moving ]] --
 -- Capital H goes to start of line, capital L goes to end of line
 vim.keymap.set({ 'n' }, 'L', '$')
 vim.keymap.set({ 'v' }, 'L', '$h')
 vim.keymap.set({ 'n', 'v' }, 'H', '^')
+vim.keymap.set("n", "<C-d>", "<C-d>zz") -- move half window down and up
+vim.keymap.set("n", "<C-u>", "<C-u>zz") -- while keeping cursor in same place
 
+-- [[ Editing - Moving lines around, copying/pasting words and stuff ]] --
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- visual mode - move selection down
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- visual mode - move selection up
+vim.keymap.set("n", "J", "mzJ`z") -- append the line below to current line
+vim.keymap.set("x", "<leader>p", "\"_dP") -- retain the initial yank
+vim.keymap.set("n", "<leader>y", "\"+y") -- yank into system clipboard
+vim.keymap.set("v", "<leader>y", "\"+y") -- "
+vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("i", "<S-CR>", "<Esc>j$a") -- Shift+Enter moves cursor down to end of next line
+vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- rename every instance of the word you're on
+
+-- [[ Window Stuff ]] --
+-- Prettier format current buffer
+vim.keymap.set("n", "<leader>f", function()
+	vim.lsp.buf.format()
+end)
 -- Close diff/results/whatever window
 vim.keymap.set('n', '<leader>bd', ':wincmd h<CR>:q<CR>')
-
 -- Close current buffer
 vim.keymap.set('n', '<leader>x', ':bw<CR>')
-
--- Let's make escape better, together.
-vim.keymap.set('', '<Leader>d', '<Esc>')
-vim.keymap.set('i', '<Leader>d', '<Esc>')
-vim.keymap.set('n', '<Leader>d', '<Esc>')
-vim.keymap.set('v', '<Leader>d', '<Esc>')
-
 -- Split window vertically or horizontally *and* switch to the new split!
 vim.keymap.set('', '<leader>vs', ':split<Bar>:wincmd j<CR>')
 vim.keymap.set('', '<leader>hs', ':vsplit<Bar>:wincmd l<CR>')
@@ -55,19 +66,17 @@ vim.keymap.set('', 'g2', ':wincmd b<Bar>:wincmd k<CR>')
 -- Lower left window
 vim.keymap.set('', 'g3', ':wincmd t<Bar>:wincmd j<CR>')
 -- Lower right window
-vim.keymap.set('', 'g4',  ':wincmd b<CR>')
+vim.keymap.set('', 'g4', ':wincmd b<CR>')
 -- Top Middle
 vim.keymap.set('', 'gt', 'g2<Bar>:wincmd h<CR>')
 -- Bottom Middle
 vim.keymap.set('', 'gb', 'g3<Bar>:wincmd l<CR>')
-
 -- Previous Window
 vim.keymap.set('', 'gp', ':wincmd p<CR>')
 -- Equal Size Windows
 vim.keymap.set('', 'g=', ':wincmd =<CR>')
 -- Swap Windows
 vim.keymap.set('', 'gx', ':wincmd x<CR>')
-
 -- Close the current split
 vim.keymap.set('', '<leader>sc', ':hide<CR>')
 
@@ -79,6 +88,7 @@ vim.keymap.set({ 'v', 'i' }, '<C-x>', '"+x')
 -- CTRL-v is paste
 vim.keymap.set({ 'v', 'n' }, '<C-v>', '"+gP')
 vim.keymap.set({ 'i' }, '<C-v>', '<esc>"+gPa')
+
 
 -- [[ Plugin Remappings ]] --
 
@@ -92,11 +102,11 @@ vim.keymap.set('n', '<leader>fw', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
 vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
+	-- You can pass additional configuration to telescope to change theme, layout, etc.
+	builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+		winblend = 10,
+		previewer = false,
+	})
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
 -- UndoTree --
@@ -113,7 +123,7 @@ vim.keymap.set('n', '<leader>gpb', ':execute ":Git push origin " . fugitive#head
 vim.keymap.set('n', '<leader>gub', ':execute ":Git pull --rebase origin " . fugitive#head(0)<CR>')
 vim.keymap.set('n', '<leader>gx', ':execute ":Git checkout %"<CR>')
 
--- Bufferline -- 
+-- Bufferline --
 -- cycling through buffers/tabs
 vim.keymap.set('n', 'th', ':bprev<CR>')
 vim.keymap.set('n', 'tl', ':bnext<CR>')
