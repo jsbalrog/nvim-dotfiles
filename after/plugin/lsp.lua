@@ -44,7 +44,7 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
 	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
 	vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-	vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+	vim.keymap.set("n", "<leader>e", function() vim.diagnostic.open_float() end, opts)
 	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
 	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
 	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
@@ -54,14 +54,19 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- Show diagnostics on the same line, four spaces to the right
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
-  update_in_insert = false,
-  virtual_text = { spacing = 4, prefix = "●" },
-  severity_sort = true,
-}
-)
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+--   vim.lsp.diagnostic.on_publish_diagnostics, {
+--   underline = true,
+--   update_in_insert = false,
+--   virtual_text = { spacing = 4, prefix = "●" },
+--   severity_sort = true,
+-- }
+-- )
+
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
+
+lsp.setup()
 
 -- Diagnostic symbols in the sign column (gutter)
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -74,13 +79,11 @@ vim.diagnostic.config({
   virtual_text = {
     prefix = '●'
   },
-  update_in_insert = true,
+  update_in_insert = false,
   float = {
     source = "always", -- Or "if_many"
+    header = '',
+    prefix = ''
   },
 })
 
--- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
-
-lsp.setup()

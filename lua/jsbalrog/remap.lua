@@ -140,3 +140,22 @@ vim.keymap.set({ 'i' }, '<leader>`', '<ESC>:Neotree toggle<CR>')
 -- Bubble multiple lines
 vim.keymap.set('v', '<C-k>', '[egv', { remap = true })
 vim.keymap.set('v', '<C-j>', ']egv', { remap = true })
+
+vim.keymap.set("n", "<leader>tt", "<cmd>TroubleToggle<cr>",
+	{ silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>tw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+	{ silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>td", "<cmd>TroubleToggle document_diagnostics<cr>",
+	{ silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>tl", "<cmd>TroubleToggle loclist<cr>",
+	{ silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>tq", "<cmd>TroubleToggle quickfix<cr>",
+	{ silent = true, noremap = true }
+)
+vim.keymap.set("n", "<leader>tr", "<cmd>TroubleToggle lsp_references<cr>",
+	{ silent = true, noremap = true }
+)

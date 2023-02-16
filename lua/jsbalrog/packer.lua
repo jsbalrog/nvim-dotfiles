@@ -4,87 +4,96 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+	-- Packer can manage itself
+	use 'wbthomason/packer.nvim'
 
-  use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
-	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.1',
+		-- or                            , branch = '0.1.x',
+		requires = { { 'nvim-lua/plenary.nvim' } }
+	}
 
-  use 'Mofiqul/vscode.nvim'
+	use 'Mofiqul/vscode.nvim'
 
-  use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-  use ('nvim-treesitter/playground')
+	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+	use('nvim-treesitter/playground')
 
-  use 'theprimeagen/harpoon'
+	use 'theprimeagen/harpoon'
 
-  use 'mbbill/undotree'
+	use 'mbbill/undotree'
 
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
+	use 'tpope/vim-fugitive'
+	use 'tpope/vim-rhubarb'
+	use 'lewis6991/gitsigns.nvim'
 
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+	use 'nvim-lualine/lualine.nvim' -- Fancier statusline
 
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
+	use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
 
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+	use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
-  use 'norcalli/nvim-colorizer.lua' -- colorize css
+	use 'norcalli/nvim-colorizer.lua' -- colorize css
 
-  use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v1.x',
-	  requires = {
-		  -- LSP Support
-		  {'neovim/nvim-lspconfig'},             -- Required
-		  {'williamboman/mason.nvim'},           -- Optional
-		  {'williamboman/mason-lspconfig.nvim'}, -- Optional
+	use {
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v1.x',
+		requires = {
+			-- LSP Support
+			{ 'neovim/nvim-lspconfig' }, -- Required
+			{ 'williamboman/mason.nvim' }, -- Optional
+			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
-		  -- Autocompletion
-		  {'hrsh7th/nvim-cmp'},         -- Required
-		  {'hrsh7th/cmp-nvim-lsp'},     -- Required
-		  {'hrsh7th/cmp-buffer'},       -- Optional
-		  {'hrsh7th/cmp-path'},         -- Optional
-		  {'saadparwaiz1/cmp_luasnip'}, -- Optional
-		  {'hrsh7th/cmp-nvim-lua'},     -- Optional
+			-- Autocompletion
+			{ 'hrsh7th/nvim-cmp' }, -- Required
+			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
+			{ 'hrsh7th/cmp-buffer' }, -- Optional
+			{ 'hrsh7th/cmp-path' }, -- Optional
+			{ 'saadparwaiz1/cmp_luasnip' }, -- Optional
+			{ 'hrsh7th/cmp-nvim-lua' }, -- Optional
 
-		  -- Snippets
-		  {'L3MON4D3/LuaSnip'},             -- Required
-		  {'rafamadriz/friendly-snippets'}, -- Optional
-	  }
-  }
+			-- Snippets
+			{ 'L3MON4D3/LuaSnip' }, -- Required
+			{ 'rafamadriz/friendly-snippets' }, -- Optional
+		}
+	}
 
-  -- See your buffers as tabs
-  use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
+	-- Show your vim diagnostics in a powerful way --
+	use {
+		"folke/trouble.nvim",
+		requires = "nvim-tree/nvim-web-devicons"
+	}
 
-  use { "echasnovski/mini.nvim", branch = "stable" } -- So I can use mini.cursorword
+	-- See your buffers as tabs
+	use { 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons' }
 
-  use 'j-hui/fidget.nvim' -- useful status updates for LSP
+	use { "echasnovski/mini.nvim", branch = "stable" } -- So I can use mini.cursorword
 
-  use {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
-    }
-  }
+	use 'j-hui/fidget.nvim' -- useful status updates for LSP
 
-  use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
+	use {
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		}
+	}
 
-  use 'tpope/vim-surround' -- surround things with things
+	use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
 
-  use 'windwp/nvim-autopairs'
+	use 'tpope/vim-surround' -- surround things with things
 
-  -- Comment-related plugins
-  use 'numToStr/Comment.nvim'
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
+	use 'windwp/nvim-autopairs'
 
-  -- Prettier-related plugins (along with nvim-lspconfig, already required above)
-  use 'MunifTanjim/prettier.nvim'
-  use 'jose-elias-alvarez/null-ls.nvim'
+	-- Comment-related plugins
+	use 'numToStr/Comment.nvim'
+	use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+	-- Prettier-related plugins (along with nvim-lspconfig, already required above)
+	use 'MunifTanjim/prettier.nvim'
+	use 'jose-elias-alvarez/null-ls.nvim'
+
+	-- Let's play!
+	use 'ThePrimeagen/vim-be-good'
 end)
