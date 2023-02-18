@@ -50,6 +50,8 @@ return require('packer').startup(function(use)
 			{ 'hrsh7th/cmp-path' }, -- Optional
 			{ 'saadparwaiz1/cmp_luasnip' }, -- Optional
 			{ 'hrsh7th/cmp-nvim-lua' }, -- Optional
+			{ 'onsails/lspkind.nvim' }, --Icons
+			{ 'mortepau/codicons.nvim' },
 
 			-- Snippets
 			{ 'L3MON4D3/LuaSnip' }, -- Required
@@ -79,6 +81,9 @@ return require('packer').startup(function(use)
 			"MunifTanjim/nui.nvim",
 		}
 	}
+
+	-- This mirrors tmux panes plugin
+	use 'christoomey/vim-tmux-navigator'
 
 	use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
 

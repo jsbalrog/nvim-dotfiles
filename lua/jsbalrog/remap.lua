@@ -34,8 +34,8 @@ vim.keymap.set('n', '<leader>bd', ':wincmd h<CR>:q<CR>')
 -- Close current buffer
 vim.keymap.set('n', '<leader>x', ':bw<CR>')
 -- Split window vertically or horizontally *and* switch to the new split!
-vim.keymap.set('', '<leader>vs', ':split<Bar>:wincmd j<CR>')
-vim.keymap.set('', '<leader>hs', ':vsplit<Bar>:wincmd l<CR>')
+vim.keymap.set('', '<leader>-', ':split<Bar>:wincmd j<CR>')
+vim.keymap.set('', '<leader>|', ':vsplit<Bar>:wincmd l<CR>')
 -- Window split movements
 -- " Here's a visual guide for moving between window splits.
 --  4 Window Splits
@@ -98,6 +98,7 @@ vim.keymap.set('n', '<leader>?', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fw', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end)
@@ -108,7 +109,7 @@ vim.keymap.set('n', '<leader>/', function()
 		previewer = false,
 	})
 end, { desc = '[/] Fuzzily search in current buffer]' })
-
+vim.keymap.set('n', '<leader>gl', builtin.git_commits, { desc = '[ ] List git commits with diff preview'})
 -- UndoTree --
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 

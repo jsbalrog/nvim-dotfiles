@@ -23,17 +23,63 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<C-Space>'] = cmp.mapping.complete(),
 })
 
+local cmp_kinds = {
+  Text = '  ',
+  Method = '  ',
+  Function = '  ',
+  Constructor = '  ',
+  Field = '  ',
+  Variable = '  ',
+  Class = '  ',
+  Interface = '  ',
+  Module = '  ',
+  Property = '  ',
+  Unit = '  ',
+  Value = '  ',
+  Enum = '  ',
+  Keyword = '  ',
+  Snippet = '  ',
+  Color = '  ',
+  File = '  ',
+  Reference = '  ',
+  Folder = '  ',
+  EnumMember = '  ',
+  Constant = '  ',
+  Struct = '  ',
+  Event = '  ',
+  Operator = '  ',
+  TypeParameter = '  ',
+}
+
 lsp.set_preferences({
 	sign_icons = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 })
 
 lsp.setup_nvim_cmp({
-	mapping = cmp_mappings,
-	preselect = 'none',
-	completion = {
-	  completeopt = 'menu,menuone,noinsert,noselect',
-	  -- autocomplete = false
-	},
+  mapping = cmp_mappings,
+  preselect = 'none',
+  completion = {
+    completeopt = 'menu,menuone,noinsert,noselect',
+    -- autocomplete = false
+  },
+  window = {
+    completion = {
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+      col_offset = -3,
+      side_padding = 0,
+    },
+  },
+  formatting = {
+    fields = { "kind", "abbr", "menu" },
+    format = function(entry, vim_item)
+      local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
+      local strings = vim.split(kind.kind, "%s", { trimempty = true })
+      kind.kind = " " .. (strings[1] or "") .. " "
+      kind.menu = "    (" .. (strings[2] or "") .. ")"
+
+      return kind
+    end,
+  },
 })
 
 lsp.on_attach(function(client, bufnr)
@@ -54,14 +100,14 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- Show diagnostics on the same line, four spaces to the right
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---   vim.lsp.diagnostic.on_publish_diagnostics, {
---   underline = true,
---   update_in_insert = false,
---   virtual_text = { spacing = 4, prefix = "●" },
---   severity_sort = true,
--- }
--- )
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+  underline = true,
+  update_in_insert = false,
+  virtual_text = { spacing = 4, prefix = "●" },
+  severity_sort = true,
+}
+)
 
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
