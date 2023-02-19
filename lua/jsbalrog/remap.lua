@@ -109,7 +109,7 @@ vim.keymap.set('n', '<leader>/', function()
 		previewer = false,
 	})
 end, { desc = '[/] Fuzzily search in current buffer]' })
-vim.keymap.set('n', '<leader>gl', builtin.git_commits, { desc = '[ ] List git commits with diff preview'})
+vim.keymap.set('n', '<leader>gl', builtin.git_commits, { desc = '[ ] List git commits with diff preview' })
 -- UndoTree --
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 
