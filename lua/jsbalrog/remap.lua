@@ -116,7 +116,7 @@ vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 -- Fugitive --
 vim.keymap.set("n", "<leader>gs", ':below Git<CR>')
 vim.keymap.set('n', '<leader>gw', ':Git add %<CR>')
-vim.keymap.set('n', '<leader>gc', ':Git commit -v<CR>')
+vim.keymap.set('n', '<leader>gc', ':below Git commit -v<CR>')
 vim.keymap.set('n', '<leader>gp', ':Git push<CR>')
 vim.keymap.set('n', '<leader>gu', ':Git pull<CR>')
 vim.keymap.set('n', '<leader>gd', ':Gdiff<CR>')
