@@ -1,5 +1,7 @@
 -- Set lualine as statusline
 -- See `:help lualine.txt`
+local vscode = require 'lualine.themes.vscode'
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -13,7 +15,7 @@ require('lualine').setup {
     lualine_c = { {
       'filename',
       file_status = true, -- displays file status (readonly status, modified status)
-      path = 0 -- 0 = just filename, 1 = relative path, 2 = absolute path
+      path = 1 -- 1 = just filename, 1 = relative path, 2 = absolute path
     } },
     lualine_x = {
       { 'diagnostics', sources = { "nvim_diagnostic" }, symbols = { error = ' ', warn = ' ', info = ' ',

@@ -7,8 +7,7 @@ vim.keymap.set({ '', 'i', 'n', 'v' }, '<Leader>d', '<Esc>') -- Comma + d is esca
 
 -- [[ Moving ]] --
 -- Capital H goes to start of line, capital L goes to end of line
-vim.keymap.set({ 'n' }, 'L', '$')
-vim.keymap.set({ 'v' }, 'L', '$h')
+vim.keymap.set({ 'n', 'v' }, 'L', 'g_') -- jump to last non-blank character of the line (use $ to jump to last char, blank or not)
 vim.keymap.set({ 'n', 'v' }, 'H', '^')
 vim.keymap.set("n", "<C-d>", "<C-d>zz") -- move half window down and up
 vim.keymap.set("n", "<C-u>", "<C-u>zz") -- while keeping cursor in same place
