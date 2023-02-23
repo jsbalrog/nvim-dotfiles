@@ -23,6 +23,9 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 vim.keymap.set("i", "<S-CR>", "<Esc>j$a") -- Shift+Enter moves cursor down to end of next line
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>") -- rename every instance of the word you're on
 
+-- Search and replace selected text in view mode
+vim.keymap.set('v', '<C-r>', 'hy:%s/<C-r>h//g<left><left>')
+
 -- [[ Window Stuff ]] --
 -- Prettier format current buffer
 vim.keymap.set("n", "<leader>f", function()

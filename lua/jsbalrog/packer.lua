@@ -52,10 +52,13 @@ return require('packer').startup(function(use)
 			{ 'hrsh7th/cmp-nvim-lua' }, -- Optional
 			{ 'onsails/lspkind.nvim' }, --Icons
 			{ 'mortepau/codicons.nvim' },
+			{ 'hrsh7th/cmp-nvim-lsp-signature-help' },
 
 			-- Snippets
 			{ 'L3MON4D3/LuaSnip' }, -- Required
 			{ 'rafamadriz/friendly-snippets' }, -- Optional
+			{ 'hrsh7th/cmp-vsnip' },
+			{ 'hrsh7th/vim-vsnip' },
 		}
 	}
 
@@ -98,6 +101,9 @@ return require('packer').startup(function(use)
 	-- Prettier-related plugins (along with nvim-lspconfig, already required above)
 	use 'MunifTanjim/prettier.nvim'
 	use 'jose-elias-alvarez/null-ls.nvim'
+
+	-- Extra functionality over rust analyzer
+	use("simrat39/rust-tools.nvim")
 
 	-- Let's play!
 	use 'ThePrimeagen/vim-be-good'

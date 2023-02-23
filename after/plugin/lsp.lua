@@ -1,8 +1,8 @@
 local lsp = require('lsp-zero').preset({
-	name = 'minimal',
+	name = 'recommended',
 	set_lsp_keymaps = true,
 	manage_nvim_cmp = true,
-	suggest_lsp_servers = false,
+	suggest_lsp_servers = true,
 })
 
 lsp.ensure_installed({
@@ -51,10 +51,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 -- 	TypeParameter = '  ',
 -- }
 
-lsp.set_preferences({
-	sign_icons = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-})
-
+-- ------------------------------------------------- --
+-- [[ Autocomplete stuff, including jump mappings ]] --
+-- ------------------------------------------------- --
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 keymap("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
@@ -89,6 +88,9 @@ lsp.setup_nvim_cmp({
 	},
 })
 
+-- ---------------------------------------------- --
+-- [[ lsp intellisense-type stuff and mappings ]] --
+-- ---------------------------------------------- --
 lsp.on_attach(function(client, bufnr)
 	local opts = { buffer = bufnr, remap = false }
 	vim.keymap.set("n", '<leader>rn', function() vim.lsp.buf.rename() end, opts)
@@ -104,9 +106,30 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
 	vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+	vim.keymap.set('n', '<leader>q', ':cclose<CR>,') -- close quickfix window, which is where multiple files show
 end)
 
--- Show diagnostics on the same line, four spaces to the right
+
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
+
+-- ------------------------------------------------------ --
+-- [[ This section contains diagnostics customizations ]] --
+-- ------------------------------------------------------ --
+
+-- Set a sign icon in the lualine --
+lsp.set_preferences({
+	sign_icons = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+})
+
+-- Customize the Diagnostic symbols in the sign column (gutter) --
+-- Show diagnostics on the same line, four spaces to the right --
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	vim.lsp.diagnostic.on_publish_diagnostics, {
 	underline = true,
@@ -115,19 +138,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 	severity_sort = true,
 }
 )
-
--- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
-
-lsp.setup()
-
--- Diagnostic symbols in the sign column (gutter)
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
-
 vim.diagnostic.config({
 	virtual_text = {
 		prefix = '●'
@@ -139,3 +149,15 @@ vim.diagnostic.config({
 		prefix = ''
 	},
 })
+
+
+-- Show line diagnostics automatically in hover window --
+-- vim.diagnostic.config({
+--   virtual_text = false
+-- })
+--
+-- vim.o.updatetime = 250
+-- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+-- Call setup() last --
+lsp.setup()
