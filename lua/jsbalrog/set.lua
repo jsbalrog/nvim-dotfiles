@@ -24,6 +24,10 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 
+-- For which-key
+vim.o.timeout = true
+vim.o.timeoutlen = 500
+
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })

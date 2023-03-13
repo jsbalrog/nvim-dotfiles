@@ -318,6 +318,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/vscode.nvim",
     url = "https://github.com/Mofiqul/vscode.nvim"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

@@ -7,6 +7,8 @@ return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
+	use 'folke/which-key.nvim'
+
 	use {
 		'nvim-telescope/telescope.nvim', tag = '0.1.1',
 		-- or                            , branch = '0.1.x',
@@ -93,6 +95,8 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-surround' -- surround things with things
 
 	use 'windwp/nvim-autopairs'
+
+	use 'windwp/nvim-ts-autotag'
 
 	-- Comment-related plugins
 	use 'numToStr/Comment.nvim'
