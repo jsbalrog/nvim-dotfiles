@@ -224,6 +224,11 @@ _G.packer_plugins = {
     path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    url = "https://github.com/windwp/nvim-ts-autotag"
+  },
   ["nvim-ts-context-commentstring"] = {
     loaded = true,
     path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
@@ -318,11 +323,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/vscode.nvim",
     url = "https://github.com/Mofiqul/vscode.nvim"
-  },
-  ["which-key.nvim"] = {
-    loaded = true,
-    path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/which-key.nvim",
-    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

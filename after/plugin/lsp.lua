@@ -117,30 +117,28 @@ lsp.nvim_workspace()
 -- [[ This section contains diagnostics customizations ]] --
 -- ------------------------------------------------------ --
 
--- Set a sign icon in the lualine --
 lsp.set_preferences({
 	sign_icons = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 })
 
 -- Customize the Diagnostic symbols in the sign column (gutter) --
--- Show diagnostics on the same line, four spaces to the right --
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics, {
-	underline = true,
-	update_in_insert = false,
-	virtual_text = { spacing = 4, prefix = "●" },
-	severity_sort = true,
-}
-)
+-- Call setup() last --
+lsp.setup()
+
+
+-- Show line diagnostics automatically on same line, four spaces to the right --
+-- (Call after lsp.setup()) --
 vim.diagnostic.config({
+	underline = true,
 	virtual_text = {
-		prefix = '●'
+		prefix = '●',
+		spacing = 4,
 	},
 	update_in_insert = false,
 	float = {
@@ -150,14 +148,11 @@ vim.diagnostic.config({
 	},
 })
 
-
--- Show line diagnostics automatically in hover window --
+-- Show line diagnostics in a popup --
 -- vim.diagnostic.config({
 --   virtual_text = false
 -- })
---
--- vim.o.updatetime = 250
+
+-- vim.o.updatetime = 1500
 -- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 
--- Call setup() last --
-lsp.setup()
