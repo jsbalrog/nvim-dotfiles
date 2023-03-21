@@ -26,46 +26,41 @@ return require('packer').startup(function(use)
 	use 'tpope/vim-rhubarb'
 	use 'lewis6991/gitsigns.nvim'
 
-	use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+	use 'nvim-lualine/lualine.nvim'          -- Fancier statusline
 
 	use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
 
-	use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+	use 'tpope/vim-sleuth'                   -- Detect tabstop and shiftwidth automatically
 
-	use 'norcalli/nvim-colorizer.lua' -- colorize css
+	use 'norcalli/nvim-colorizer.lua'        -- colorize css
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v1.x',
 		requires = {
 			-- LSP Support
-			{ 'neovim/nvim-lspconfig' }, -- Required
-			{ 'williamboman/mason.nvim' }, -- Optional
+			{ 'neovim/nvim-lspconfig' },          -- Required
+			{ 'williamboman/mason.nvim' },        -- Optional
 			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
+			{ 'ray-x/lsp_signature.nvim' },       -- Optional; cool signature hover-ness
 
 			-- Autocompletion
-			{ 'hrsh7th/nvim-cmp' }, -- Required
-			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
-			{ 'hrsh7th/cmp-buffer' }, -- Optional
-			{ 'hrsh7th/cmp-path' }, -- Optional
+			{ 'hrsh7th/nvim-cmp' },      -- Required
+			{ 'hrsh7th/cmp-nvim-lsp' },  -- Required
+			{ 'hrsh7th/cmp-buffer' },    -- Optional
+			{ 'hrsh7th/cmp-path' },      -- Optional
 			{ 'saadparwaiz1/cmp_luasnip' }, -- Optional
-			{ 'hrsh7th/cmp-nvim-lua' }, -- Optional
-			{ 'onsails/lspkind.nvim' }, --Icons
+			{ 'hrsh7th/cmp-nvim-lua' },  -- Optional
+			{ 'onsails/lspkind.nvim' },  --Icons
 			{ 'mortepau/codicons.nvim' },
 			{ 'hrsh7th/cmp-nvim-lsp-signature-help' },
 
 			-- Snippets
-			{ 'L3MON4D3/LuaSnip' }, -- Required
+			{ 'L3MON4D3/LuaSnip' },          -- Required
 			{ 'rafamadriz/friendly-snippets' }, -- Optional
 			{ 'hrsh7th/cmp-vsnip' },
 			{ 'hrsh7th/vim-vsnip' },
 		}
-	}
-
-	-- Show your vim diagnostics in a powerful way --
-	use {
-		"folke/trouble.nvim",
-		requires = "nvim-tree/nvim-web-devicons"
 	}
 
 	-- See your buffers as tabs
@@ -73,7 +68,7 @@ return require('packer').startup(function(use)
 
 	use { "echasnovski/mini.nvim", branch = "stable" } -- So I can use mini.cursorword
 
-	use 'j-hui/fidget.nvim' -- useful status updates for LSP
+	use 'j-hui/fidget.nvim'                           -- useful status updates for LSP
 
 	use {
 		"nvim-neo-tree/neo-tree.nvim",
@@ -90,7 +85,7 @@ return require('packer').startup(function(use)
 
 	use 'tpope/vim-unimpaired' -- used for bubbling lines up, down, around...
 
-	use 'tpope/vim-surround' -- surround things with things
+	use 'tpope/vim-surround'  -- surround things with things
 
 	use 'windwp/nvim-autopairs'
 
