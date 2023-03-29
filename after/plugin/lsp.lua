@@ -91,8 +91,7 @@ lsp.setup_nvim_cmp({
 -- ---------------------------------------------- --
 -- [[ lsp intellisense-type stuff and mappings ]] --
 -- ---------------------------------------------- --
-lsp.on_attach(function(client, bufnr)
-	local opts = { buffer = bufnr, remap = false }
+lsp.on_attach(function(client)
 	vim.keymap.set("n", '<leader>rn', function() vim.lsp.buf.rename() end, opts)
 	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
 	vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
@@ -134,25 +133,25 @@ lsp.setup()
 
 -- Show line diagnostics automatically on same line, four spaces to the right --
 -- (Call after lsp.setup()) --
-vim.diagnostic.config({
-	underline = true,
-	virtual_text = {
-		prefix = '●',
-		spacing = 4,
-	},
-	update_in_insert = false,
-	float = {
-		source = "always", -- Or "if_many"
-		header = '',
-		prefix = ''
-	},
-})
-
--- Show line diagnostics in a popup --
 -- vim.diagnostic.config({
---   virtual_text = false
+-- 	underline = true,
+-- 	virtual_text = {
+-- 		prefix = '●',
+-- 		spacing = 4,
+-- 	},
+-- 	update_in_insert = false,
+-- 	float = {
+-- 		source = "always", -- Or "if_many"
+-- 		header = '',
+-- 		prefix = ''
+-- 	},
 -- })
 
--- vim.o.updatetime = 1500
--- vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+-- Show line diagnostics in a popup --
+vim.diagnostic.config({
+  virtual_text = false
+})
+
+vim.o.updatetime = 1500
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
 

@@ -13,7 +13,8 @@ return require('packer').startup(function(use)
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
 
-	use 'Mofiqul/vscode.nvim'
+	use 'Mofiqul/vscode.nvim' -- vscode default theme
+	use 'ellisonleao/gruvbox.nvim' -- gruvbox theme
 
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 	use('nvim-treesitter/playground')

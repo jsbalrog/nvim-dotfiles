@@ -1,6 +1,7 @@
 -- Set lualine as statusline
 -- See `:help lualine.txt`
 local vscode = require 'lualine.themes.vscode'
+-- local gruvbox = require 'lualine.themes.gruvbox'
 
 require('lualine').setup {
   options = {
