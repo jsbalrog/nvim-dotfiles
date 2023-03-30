@@ -144,3 +144,7 @@ vim.keymap.set({ 'i' }, '<leader>`', '<ESC>:Neotree toggle<CR>')
 vim.keymap.set('v', '<C-k>', '[egv', { remap = true })
 vim.keymap.set('v', '<C-j>', ']egv', { remap = true })
 
+-- Disable Backspace mapping so vim-visual-multi works (see https://github.com/mg979/vim-visual-multi/issues/172) --
+vim.g.VM_maps = {
+  ["I BS"] = '', -- disable backspace mapping
+}
