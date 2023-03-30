@@ -92,6 +92,8 @@ return require('packer').startup(function(use)
 
 	use 'windwp/nvim-ts-autotag'
 
+	-- use 'mg979/vim-visual-multi' -- multiple cursors (but it conflicts with autopairs)
+
 	-- Comment-related plugins
 	use 'numToStr/Comment.nvim'
 	use 'JoosepAlviste/nvim-ts-context-commentstring'
