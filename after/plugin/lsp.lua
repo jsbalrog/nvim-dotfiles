@@ -221,7 +221,8 @@ end
 
 -- Show line diagnostics in a popup --
 vim.diagnostic.config({
-	virtual_text = false
+	virtual_text = false,
+	update_in_insert = false,
 })
 vim.o.updatetime = 2000
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
