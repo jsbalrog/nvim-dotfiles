@@ -13,13 +13,11 @@ return require('packer').startup(function(use)
 		requires = { { 'nvim-lua/plenary.nvim' } }
 	}
 
-	use 'Mofiqul/vscode.nvim' -- vscode default theme
+	use 'Mofiqul/vscode.nvim'     -- vscode default theme
 	use 'ellisonleao/gruvbox.nvim' -- gruvbox theme
 
 	use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 	use('nvim-treesitter/playground')
-
-	use 'theprimeagen/harpoon'
 
 	use 'mbbill/undotree'
 
@@ -43,7 +41,7 @@ return require('packer').startup(function(use)
 			{ 'neovim/nvim-lspconfig' },          -- Required
 			{ 'williamboman/mason.nvim' },        -- Optional
 			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
-			{ 'ray-x/lsp_signature.nvim' },       -- Optional; cool signature hover-ness
+			-- { 'ray-x/lsp_signature.nvim' },       -- Optional; cool signature hover-ness
 
 			-- Autocompletion
 			{ 'hrsh7th/nvim-cmp' },      -- Required
@@ -105,6 +103,12 @@ return require('packer').startup(function(use)
 	-- Extra functionality over rust analyzer
 	use("simrat39/rust-tools.nvim")
 
+	-- Find keymaps
+	-- use 'folke/which-key.nvim'
+
 	-- Let's play!
 	use 'ThePrimeagen/vim-be-good'
+
+	-- Github copilot
+	use 'github/copilot.vim'
 end)
