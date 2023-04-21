@@ -99,6 +99,9 @@ cmp.setup({
 			require("luasnip").lsp_expand(args.body)
 		end,
 	},
+	completion = {
+		autocomplete = false,
+	},
 	style = {
 		winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
 	},
