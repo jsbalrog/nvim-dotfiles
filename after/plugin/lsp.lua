@@ -17,40 +17,7 @@ lsp.ensure_installed({
 -- ----------------------------------------------------------------- --
 -- [[ This section is Autocomplete stuff, including jump mappings ]] --
 -- ----------------------------------------------------------------- --
--- local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
--- keymap("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
--- keymap("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", opts)
--- keymap("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
--- keymap("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", opts)
-
--- lsp.setup_nvim_cmp({
--- 	mapping = cmp_mappings,
--- 	preselect = 'none',
--- 	completion = {
--- 		completeopt = 'menu,menuone,noinsert,noselect',
--- 		-- autocomplete = false
--- 	},
--- 	window = {
--- 		completion = {
--- 			winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
--- 			col_offset = -3,
--- 			side_padding = 0,
--- 		},
--- 	},
--- 	formatting = {
--- 		fields = { "kind", "abbr", "menu" },
--- 		format = function(entry, vim_item)
--- 			local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry,
--- 				vim_item)
--- 			local strings = vim.split(kind.kind, "%s", { trimempty = true })
--- 			kind.kind = " " .. (strings[1] or "") .. " "
--- 			kind.menu = "    (" .. (strings[2] or "") .. ")"
---
--- 			return kind
--- 		end,
--- 	},
--- })
 
 -- -------------------------------------------------------------- --
 -- [[ This section is lsp intellisense-type stuff and mappings ]] --
@@ -74,7 +41,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- (Optional) Configure lua language server for neovim
--- lsp.nvim_workspace()
+lsp.nvim_workspace()
 
 
 -- Call setup() last --
@@ -83,56 +50,61 @@ lsp.setup()
 -- ------------------------------------------------------ --
 -- [[           This section is to set up cmp          ]] --
 -- ------------------------------------------------------ --
-local cmp_kinds = {
-	Text = '  ',
-	Method = '  ',
-	Function = '  ',
-	Constructor = '  ',
-	Field = '  ',
-	Variable = '  ',
-	Class = '  ',
-	Interface = '  ',
-	Module = '  ',
-	Property = '  ',
-	Unit = '  ',
-	Value = '  ',
-	Enum = '  ',
-	Keyword = '  ',
-	Snippet = '  ',
-	Color = '  ',
-	File = '  ',
-	Reference = '  ',
-	Folder = '  ',
-	EnumMember = '  ',
-	Constant = '  ',
-	Struct = '  ',
-	Event = '  ',
-	Operator = '  ',
-	TypeParameter = '  ',
-}
+local present, cmp = pcall(require, "cmp")
+
+local lspkind = require("lspkind")
+lspkind.init({
+	symbol_map = {
+		Copilot = "",
+		Text = '  ',
+		Method = '  ',
+		Function = '  ',
+		Constructor = '  ',
+		Field = '  ',
+		Variable = '  ',
+		Class = '  ',
+		Interface = '  ',
+		Module = '  ',
+		Property = '  ',
+		Unit = '  ',
+		Value = '  ',
+		Enum = '  ',
+		Keyword = '  ',
+		Snippet = '  ',
+		Color = '  ',
+		File = '  ',
+		Reference = '  ',
+		Folder = '  ',
+		EnumMember = '  ',
+		Constant = '  ',
+		Struct = '  ',
+		Event = '  ',
+		Operator = '  ',
+		TypeParameter = '  ',
+	},
+})
 
 local has_words_before = function()
 	unpack = unpack or table.unpack
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-
-local cmp = require('cmp')
 local luasnip = require("luasnip")
-local lspkind = require("lspkind")
 
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+vim.opt.completeopt = "menuone,noselect"
 cmp.setup({
 	snippet = {
 		expand = function(args)
-			-- vim.fn["vsnip#anonymous"](args.body)   -- For `vsnip` users.
-			require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-			-- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+			require("luasnip").lsp_expand(args.body)
 		end,
 	},
-	-- completion = {
-	-- 	autocomplete = true,
-	-- },
+	style = {
+		winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+	},
+	formatting = {
+		format = lspkind.cmp_format({ with_text = false, maxwidth = 50 }),
+	},
 	mapping = cmp.mapping.preset.insert({
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -140,18 +112,15 @@ cmp.setup({
 		['<C-e>'] = cmp.mapping.close(),
 		['<CR>'] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
-			select = true
+			select = false
 		}),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			local copilot_keys = vim.fn['copilot#Accept']()
 			if cmp.visible() then
 				cmp.select_next_item()
 				-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
 				-- they way you will only jump inside the snippet region
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
-			elseif copilot_keys ~= '' and type(copilot_keys) == 'string' then
-				vim.api.nvim_feedkeys(copilot_keys, 'i', true)
 			elseif has_words_before() then
 				cmp.complete()
 			else
@@ -168,31 +137,35 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 	}),
-	-- mapping = {
-	-- 	-- ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-	-- 	-- ['<C-f>'] = cmp.mapping.scroll_docs(4),
-	-- 	-- ['<C-Space>'] = cmp.mapping.complete(),
-	-- 	-- ['<C-e>'] = cmp.mapping.abort(),
-	-- 	['<CR>'] = cmp.mapping.confirm({ select = true }),
-	-- },
-
-	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		-- { name = 'vsnip' }, -- For vsnip users.
-		{ name = 'luasnip' }, -- For luasnip users.
-		-- { name = 'ultisnips' }, -- For ultisnips users.
-		-- { name = 'snippy' }, -- For snippy users.
-		{ name = 'buffer' },
-	}),
-	formatting = {
-		fields = { "kind", "abbr" },
-		format = function(_, vim_item)
-			vim_item.kind = cmp_kinds[vim_item.kind] or ""
-			return vim_item
-		end,
+	experimental = {
+		native_menu = false,
+		ghost_text = true,
 	},
+	sources = {
+		{ name = "nvim_lsp", group_index = 2 },
+		{ name = "copilot",  group_index = 2 },
+		{ name = "path",     group_index = 2 },
+		{ name = 'orgmode',  group_index = 2 },
+		{ name = 'neorg',    group_index = 2 },
+		{ name = "nvim_lua", group_index = 2 },
+		{ name = "luasnip",  group_index = 2 },
+		{ name = "buffer",   group_index = 5 },
+	},
+	sorting = {
+		comparators = {
+			cmp.config.compare.recently_used,
+			cmp.config.compare.offset,
+			cmp.config.compare.score,
+			cmp.config.compare.sort_text,
+			cmp.config.compare.length,
+			cmp.config.compare.order,
+		},
+	},
+	preselect = cmp.PreselectMode.Item,
 })
 
+--set max height of items
+vim.cmd([[ set pumheight=6 ]])
 vim.cmd [[
 	set completeopt=menuone,noinsert,noselect
 	highlight! default link CmpItemKind CmpItemMenuDefault
@@ -212,7 +185,7 @@ end
 -- 	underline = true,
 -- 	virtual_text = {
 -- 		prefix = '●',
--- 		spacing = 4,
+-- 		spacing = 8,
 -- 	},
 -- 	update_in_insert = false,
 -- 	float = {
@@ -224,7 +197,8 @@ end
 
 -- Show line diagnostics in a popup --
 vim.diagnostic.config({
-	virtual_text = false
+	virtual_text = false,
+	update_in_insert = false,
 })
 vim.o.updatetime = 2000
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]

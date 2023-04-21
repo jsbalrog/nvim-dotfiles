@@ -110,5 +110,9 @@ return require('packer').startup(function(use)
 	use 'ThePrimeagen/vim-be-good'
 
 	-- Github copilot
-	use 'github/copilot.vim'
+	use { "zbirenbaum/copilot.lua" }
+	use {
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" }
+	}
 end)

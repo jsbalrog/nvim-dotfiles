@@ -129,10 +129,17 @@ _G.packer_plugins = {
     path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/codicons.nvim",
     url = "https://github.com/mortepau/codicons.nvim"
   },
-  ["copilot.vim"] = {
+  ["copilot-cmp"] = {
+    load_after = {},
     loaded = true,
-    path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/copilot.vim",
-    url = "https://github.com/github/copilot.vim"
+    needs_bufread = false,
+    path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/opt/copilot-cmp",
+    url = "https://github.com/zbirenbaum/copilot-cmp"
+  },
+  ["copilot.lua"] = {
+    loaded = true,
+    path = "/Users/JenkinsET/.local/share/nvim/site/pack/packer/start/copilot.lua",
+    url = "https://github.com/zbirenbaum/copilot.lua"
   },
   ["fidget.nvim"] = {
     loaded = true,
@@ -332,6 +339,11 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd copilot.lua ]]
+vim.cmd [[ packadd copilot-cmp ]]
+time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
