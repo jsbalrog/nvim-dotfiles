@@ -130,9 +130,9 @@ cmp.setup({
 			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
 		end,
 	},
-	-- completion = {
-	-- 	autocomplete = true,
-	-- },
+	completion = {
+		autocomplete = true,
+	},
 	mapping = cmp.mapping.preset.insert({
 		['<C-d>'] = cmp.mapping.scroll_docs(-4),
 		['<C-f>'] = cmp.mapping.scroll_docs(4),
